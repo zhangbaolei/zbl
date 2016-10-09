@@ -1,0 +1,181 @@
+
+
+<div id="competStart" style="display:none;">
+<div class="content">
+	<div class="banner">
+		<img  id="competImg" alt="" style="height:2.8rem;width:100%;"/>
+		<div class="bottom"><p>比赛时间：<span id="beginDate"></span> - <span id="endDate"></span></p></div>
+	</div>
+	<div class="competition">
+		<ul class="comp_nav clearfix">
+			<li class="active">
+				<a class="listName">获奖名单</a>
+			</li>
+			<li>
+				<a>比赛规则</a>
+			</li>
+		</ul>
+		<!-- 获奖名单list -->
+		<div class= "hjmdlist" id="hjmdContent" style="display:none;overflow:auto;">
+		<table class="ranking hjmd" width="100%" border="0" cellspacing="0" cellpadding="0">
+			<thead>
+				<tr>
+					<th colspan="2">
+						<div class="tt"></div>
+					</th>					
+				</tr>
+			</thead>
+			<tbody id = "hjmd-list">		
+			</tbody>
+		</table>
+		</div>
+		<!-- 赛场排名list -->
+		<div class= "rankingthead" style="display:none">
+		<table class="ranking" width="100%" border="0" cellspacing="0" cellpadding="0">
+			<thead>
+				<tr>
+					<th>排名</th>
+					<th>收益率</th>
+				</tr>
+			</thead>
+		</table>
+		</div>
+		<div class= "rankinglist" id="rankContent" style="display:none;overflow:auto;">
+		<table class="ranking" width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tbody id = "ranking-list">		
+			</tbody>
+		</table>
+		</div>
+		
+
+		<!-- 比赛规则 -->
+		<div class="innerRules"	 style="display:none">
+			<div class="bsgz">
+				<div class="cd">奖励</div>
+				<ul class="reward clearfix">
+					<li>
+						<img src="images/num1.png" />
+						<p>一等奖 x<span id="firstnum">1</span></p>
+						<em id="first-price"></em>
+					</li>
+					<li>
+						<img src="images/num2.png" />
+						<p>二等奖 x<span id="secondnum">2</span></p>
+						<em id="second-price"></em>
+					</li>
+					<li>
+						<img src="images/num3.png" />
+						<p>三等奖 x<span id="thirdnum">3</span></p>
+						<em id="third-price"></em>
+					</li>
+				</ul>						
+			</div>		
+			<div class="bsgz_main">
+				<h2><i></i>比赛规则</h2>
+				<div class="gz_txt" id="rules">
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+<script type="text/html" id="temp_hjmdlist">
+	{{each list as v i}} 
+		{{if v.order_in < 4}}    
+				<tr>
+					<td class="clearfix">
+						<i class="num num{{v.order_in}}"></i>
+						<div class="tx">
+							<img src="{{v.avatar|| 'images/tx_1.png'}}" />
+						</div>
+						<div class="txt">
+							<p class="name">{{v.nick_name}}</p>
+							{{if v.income_ratio > 0}}
+							<p>收益：<em class="z_sy">+{{v.income_ratio | formatRatio}}%</em></p>
+							{{else}}
+							{{if v.income_ratio == 0}}
+							<p>收益：<em class="b_sy"> {{v.income_ratio | formatRatio}}%</em></p>
+							{{else}}
+							<p>收益：<em class="d_sy"> {{v.income_ratio | formatRatio}}%</em></p>
+							{{/if}}
+							{{/if}}
+						</div>
+					</td>
+					<td class="z_sy">{{v.reward_content}}</td>	
+				</tr>
+		{{else}}
+				<tr>
+					<td class="clearfix">
+						<i class="num">{{v.order_in}}</i>
+						<div class="tx">
+							<img src="{{v.avatar|| '../images/tx_1.png'}}" />
+						</div>
+						<div class="txt">
+							<p class="name">{{v.nick_name}}</p>
+							{{if v.income_ratio > 0}}
+							<p>收益：<em class="z_sy">+{{v.income_ratio | formatRatio}}%</em></p>
+							{{else}}
+							{{if v.income_ratio == 0}}
+							<p>收益：<em class="b_sy"> {{v.income_ratio | formatRatio}}%</em></p>
+							{{else}}
+							<p>收益：<em class="d_sy"> {{v.income_ratio | formatRatio}}%</em></p>
+							{{/if}}
+							{{/if}}
+						</div>
+					</td>
+					<td class="z_sy">{{v.reward_content}}</td>
+				</tr>
+		{{/if}}
+	{{/each}} 
+				
+</script>
+<script type="text/html" id="temp_ranklist">
+	{{each list as v i}} 
+		{{if v.profit_rank< 4}}   
+				<tr>
+					<td class="clearfix">
+						<i class="num num{{v.profit_rank}}">{{v.profit_rank}}</i>
+						<div class="tx">
+							<img src="{{v.avatar|| 'images/tx_1.png'}}" />
+						</div>
+						<p class="name">{{v.user_name}}</p>
+					</td>
+					{{if v.income_ratio > 0}}
+						<td class="z_sy">+{{v.income_ratio | formatRatio}}%</td>
+					{{else}}
+						{{if v.income_ratio == 0}}
+							<td class="b_sy">{{v.income_ratio | formatRatio}}%</td>
+						{{else}}
+							<td class="d_sy">{{v.income_ratio | formatRatio}}%</td>
+						{{/if}}
+					{{/if}}
+				</tr>
+		{{else}}
+				<tr>
+					<td class="clearfix">
+						<i class="num">{{v.profit_rank}}</i>
+						<div class="tx">
+							<img src="{{v.avatar|| 'images/tx_1.png'}}" />
+						</div>
+						<p class="name">{{v.user_name}}</p>
+					</td>
+					{{if v.income_ratio > 0}}
+						<td class="z_sy">+{{v.income_ratio | formatRatio}}%</td>
+					{{else}}
+						{{if v.income_ratio == 0}}
+							<td class="b_sy">{{v.income_ratio | formatRatio}}%</td>
+						{{else}}
+							<td class="d_sy">{{v.income_ratio | formatRatio}}%</td>
+						{{/if}}
+					{{/if}}
+				</tr>
+		{{/if}}
+	{{/each}}
+</script>
+
+	<div class="bottom_btn">
+		<a id="btn" class="ui-btn ui-btnno">比赛已结束</a>
+	</div>
+      
+</div>
+      

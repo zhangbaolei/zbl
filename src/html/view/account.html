@@ -1,0 +1,124 @@
+<div class="content" id="account" style="display:none;">
+    <div class="head_title_wrap">
+        <ul class="head_title clearfix">
+            <li>
+                <h3>累计收益率</h3>
+                <p id="total_profit">--</p>
+                <!--<a href="###">查看详情</a>-->
+            </li>
+            <li>
+                <h3>实时排名</h3>
+                <p id="my_rank"><span>--</span><!--<i class="up_icon down_icon"></i>--></p>
+                <a href="javascript:;" data-name="ranking">排名详情</a>
+            </li>
+            <a href="javascript:;" class="tips" data-name="competNoStart"></a>
+        </ul>
+    </div>
+    <div class="zc_num">
+        <div class="zc_num_item">
+            <h3>浮动盈亏</h3>
+            <p id="total_income">--</p>
+        </div>
+        <div class="zc_num_item">
+            <h3>今日盈亏</h3>
+            <p id="today_income">--</p>
+        </div>
+        <div class="zc_num_item">
+            <h3>总资产</h3>
+            <p id="asset_balance">--</p>
+        </div>
+    </div>
+    <ul class="funs_area clearfix">
+        <li><a href="javascript:;" data-name="position"><i></i><p>持仓</p></a></li>
+        <li><a href="javascript:;" data-name="entrust?tabName=buy"><i></i><p>买入</p></a></li>
+        <li><a href="javascript:;" data-name="entrust?tabName=sell"><i></i><p>卖出</p></a></li>
+        <li><a href="javascript:;" data-name="killorder"><i></i><p>撤单</p></a></li>
+        <li><a href="javascript:;" data-name="inquiry"><i></i><p>查询</p></a></li>
+    </ul>
+    <h2 class="account_title"><i></i>持仓分布</h2>
+    <div class="ccfb">
+        <div class="chart-bg">
+            <div  id="pie_e" class="chart-view">
+                &nbsp;
+            </div>
+
+            <!--图例表示-->
+            <div class="legend">
+                <table style="" width="100%" height="100%" border="0" cellspacing="0" cellpadding="0"">
+                <tr>
+                    <td align="center" valign="middle" id="legend_table"></td>
+                </tr>
+                </table>
+            </div>
+
+            <!--当前仓位-->
+            <div class="centerStr">
+                <span>仓位</span><br/>
+                <span id="percent">---</span>
+                <span style="font-size:0.24rem">%</span>
+            </div>
+
+        </div>
+    </div>
+    <h2 class="account_title"><i class="yk"></i>持仓盈亏</h2>
+    <table class="ccyk" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <thead>
+            <tr>
+                <th>名称/代码</th>
+                <th>市值</th>
+                <th>盈亏</th>
+            </tr>
+        </thead>
+        <tbody id="position_list">
+
+        </tbody>
+    </table>
+    <div class="no-position" style="display: none">
+        <span style="display:block;position: relative; font-size: 0.3rem; color: #444;margin:0.6rem;text-align:center;">暂无持仓</span>
+    </div>
+    <!--持仓模版-->
+    <script id="temp_list" type="text/html">
+        {{if list.length > 0}}
+        {{[ array=[["yk", "yk_p"], ["", ""], ["yk_k", "yk_k_p"] ]]}}
+        {{each list as v i}}
+        <tr class="{{v.stock_code == cur ? 'touched' : ''}}">
+            <td><p class="stock-name">{{v.stock_name}}</p><p class="code" date-code="{{v.stock_code}}">{{v.stock_code | delSuffix}}</p></td>
+            <td>{{v.market_value}}</td>
+            <td>
+                {{[index = v.income_balance>0 ? 0 : v.income_balance==0?1:2]}}
+                <p class="{{array[index][0]}}">{{v.income_balance>0?"+":""}}{{v.income_balance}}</p>
+                <p class="{{array[index][1]}}">{{v.income_balance>0?"+":""}}{{v.market_value==0 ? '0':v.profit_ratio}}</p>
+            </td>
+        </tr>
+        <tr class="b_or_s_or_h">
+            <td colspan="3">
+                <div class="clearfix">
+                    <span style="display: none" name="position_str">{{v.position_str}}</span>
+                    <span style="display: none" name="code">{{v.stock_code}}</span>
+                    <a class="buy" href="javascript:;">买入</a>
+                    <a class="sell {{v.enable_amount == 0 ? 'disabled' : ''}}"  href="javascript:;">卖出</a>
+                    <a class="hq" href="javascript:;">行情</a>
+                </div>
+            </td>
+        </tr>
+        {{/each}}
+        {{/if}}
+    </script>
+    <!--图表模版-->
+    <script id="legend_list" type="text/html">
+        <table style="width:90%;height: {{height}};font-size: 0.24rem;color: #666666" >
+            {{each list as value i}}
+            <tr >
+                <td><span class="circle" style="background: {{value.color}};"></span></td>
+                <td>{{value.industry}}</td>
+                <td align="right">{{value.percent}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </script>
+</div>
+
+
+
+
+      

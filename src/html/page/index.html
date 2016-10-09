@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<snippet id="header" />
+  <!-- build:css css/style.css -->
+  <link rel="stylesheet" href="css/swiper-3.3.1.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animate.min.css">
+  <!-- endbuild -->
+
+	<title>一投牛炒股大赛</title>
+</head>
+<script type="text/javascript">
+  function getUrlParam (name){
+    var reg = new RegExp("(\\?|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.href.substr(1).match(reg);
+    if (r!=null  && r != 'undefined') return r[2]; return "";
+  }
+  //适应各分辨率
+  (function (doc, win) {
+    var docEl = doc.documentElement,
+    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function () {
+      var clientWidth = docEl.clientWidth;
+      if (!clientWidth) return;     
+      docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+      !Util.isApp() && Util.forIndexInit();
+    };
+
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+  })(document, window);
+</script>
+
+<body>
+  <div id="main">
+    <view id="competition" home="true"/>
+    <view id="competNoStart"/>
+    <view id="account"/>
+    <view id="ranking"/>
+    <view id="competStart"/>
+  </div>
+  <snippet id="footer" />
+  <div class="black_shield"></div>
+  <div class="test-auth-id" style="display:none">
+    <div class="auth-id">
+      <p style="padding-top:1rem"><a class="cancle-auth">X</a></p>
+      <input type="text" maxlength="25" placeholder="测试环境请预先设置auth_id">
+      <a class="set-auth">确定</a>
+    </div>
+  </div>
+  <div id="tip_shield">
+    <div class="tip">
+      <div class="tip-img"><img src="images/arrow.png" style="float:right; width:1.8rem; height:2rem;"/></div>
+    </div>
+  </div>
+</body>
+  <!-- <script src="//light.hs.net/data/api/install.js?_k=9d956fca97de4e9faec8c12735179adb&app=a_gu_da_sai_light"></script> -->
+<!--  <script src="//light.hs.net/data/api/install.js?_k=2528676ec05e44a28ca6a678433a3c13&app=compet"></script>-->
+  <!-- build:js js/app.js -->
+  <script type="text/javascript" src="js/lib/zepto.js"></script>
+  <script type="text/javascript" src="js/lib/underscore.js"></script>
+  <script type="text/javascript" src="js/lib/backbone.js"></script>
+  <script type="text/javascript" src="js/lib/framework-mvc.js"></script>
+  <script type="text/javascript" src="js/lib/framework-tool.js"></script>
+  <script type="text/javascript" src="js/lib/swiper-3.3.1.min.js"></script>
+
+  <script type="text/javascript" src="js/lib/base64.js"></script>
+  <script type="text/javascript" src="js/lib/template.js"></script>
+  <script type="text/javascript" src="js/lib/echarts.min.js"></script>
+  <script type="text/javascript" src="js/common/common.js"></script>
+  <!-- inject:view -->
+
+  <!-- endinject -->
+
+  <!-- endbuild -->
+  <script src="//res.lightyy.com/sdk/light-sdk-1.0.0.js"></script>
+  <script type="text/javascript">
+    LightSDK.register({
+        cid:"8112734868605114"// 8112734868604927
+    });
+  </script>
+  <!-- <script type="text/javascript" src="js/lib/hybrid-API.js"></script> -->
+  <!-- <script type="text/javascript" src="js/lib/hybrid-API-android.js"></script> -->
+</html>
